@@ -1,0 +1,163 @@
+:q -> quit
+:wq -> write and quit
+:q! -> force quit without saving
+:set nu -> number
+:set nonu -> no number
+/<word-to-search> -> forward
+?<word-to-search> -> backward
+:3 -> goto line 3
+:3d -> delete line 3
+:4,5d -> 4-5 lines delete
+:%d -> delete everything
+:%s/word-to-search/word-to-replace/g
+
+u -> undo
+Ctrl+r -> redo
+yy -> copy
+p -> paste
+dd -> cut
+gg -> top of the file
+shift+g -> bottom of the file
+
+user management
+================
+useradd ramesh
+id ramesh
+
+/etc/passwd -> user info
+/etc/group -> group info
+/etc/ssh/sshd_config -> ssh configuration
+/etc/sudoers -> sudo users info
+/etc/sudoers.d/<ramesh> -> extra configuration
+
+usermod -g devops ramesh -> set devops as primary group to ramesh
+usermod -aG testers ramesh -> appends testers as secondary group to ramesh
+gpasswd -d ramesh testers
+passwd ramesh
+
+key based
+==========
+1. ramesh should generate private and public keys
+2. send public key to admin
+3. he will create user
+4. he will goto ramesh directory, create .ssh folder
+5. inside .ssh, there should be a file authorized_keys, paste public key here
+6. .ssh should be on ramesh, .ssh max permission should be 700
+7. authorized_keys max permissions should be 600
+
+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPVCdhbx2IlaOCnQ4hYElMQpvu6Hfhb4XxGBkJcyObb1 siva@LAPTOP-AAIF3H01
+
+
+ssh -i ramesh ramesh@3.215.135.60
+/home/ramesh
+
+if employee leaves the organisation
+======================
+remove him from all the groups -> gpasswd -d ramesh wheel, usermod -g ramesh ramesh
+lock him immidiately -> usermod -e 1 ramesh
+kill his existing sessions -> pkill -u ramesh
+take his home folder backup -> tar -czvf /backup/ramesh-offboarding-backup.tar.gz /home/ramesh/
+search he has any other files in the system, backup -> find / -user ramesh
+then delete him
+
+find <where-to-search> options <what-to-search>
+
+/ -> root directory
+
+find / -name "*.log"
+
+find / -name "*sswd*"
+
+find / -type d -name "ramesh"
+
+userdel ramesh
+
+package management
+===================
+OS servers have URL to connect internet to fetch updates
+
+dnf install <package-name>
+
+yum -> old versions of RHEL
+dnf -> latest to yum
+
+yum is softlinked to dnf
+
+dnf remove <package-name>
+dnf update <package-name>
+dnf search <package-name>
+
+dnf list installed
+
+apt-get
+
+service management
+===================
+sshd -> it is a service continously running
+https://facebook.com -> https service is running
+
+nginx -> web/http server
+apache http -> old
+
+systemctl start nginx -> it will start the nginx server
+Linux -> Physically existing server
+Nginx -> This is a logical server/service runing inside linux server
+
+systemctl stop nginx
+systemctl restart nginx
+systemctl enable nginx -> nginx will start automatically whenever you start linux server
+systemctl disable nginx -> nginx wont start automatically when a server is restarted
+systemctl status nginx
+
+network management
+===================
+how many ports are the in system -> 0-65,535
+
+SSH -> 22
+HTTP -> 80
+HTTPS -> 443
+MySQL -> 3306
+Backend -> 8080
+SMTP -> 25
+Jenkins -> 8080
+DNS -> 53
+
+ssh ramesh@IP
+
+
+netstat -lntp
+
+http://3.215.135.60
+
+process management
+===================
+everything is process
+
+TL -> SE -> JE -> Fresher
+
+TL -> TID -> 1
+SE -> TID -> 2
+JE -> TID -> 3
+Fresher -> TID -> 4
+
+4 -> children
+3 -> parent
+
+marriage -> TID 1
+
+cat devops.txt -> 
+it will create one process for that, start the process, complete the process
+
+ps -> process started by current user
+ps -ef -> all runing process inside server
+
+foreground and background process
+sleep 60 &
+
+service should be running -> systemctl status nginx
+port should be opened -> netstat -lntp
+process also should be running -> ps -ef | grep nginx
+go and check logs
+
+
