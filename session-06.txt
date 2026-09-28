@@ -1,0 +1,117 @@
+3 tier architecture
+====================
+
+road side cart
+
+cooking -> raw materials -> eatable format
+1. Take the order
+2. Cook it
+3. Serve the order
+4. Get the payment
+
+5 members
+
+Hotel, staff hiring
+
+Cook -> raw materials -> eatable format
+
+Owner -> He is giving tokens
+Cook
+1. Take the tokens
+2. Keep them in Queue
+3. Serve them
+
+10 members
+
+Restaurant
+===========
+Captain -> Who welcomes us into restaurant, show us the table
+Waiter -> Takes the order
+Chef -> See the order, cooks the order
+Waiter -> Takes the order from Chef, garnish with Onion, Lemon, Salad, etc.
+Customer
+
+15 members
+
+Raw Materials -> Data
+Chef -> Backend Applications (Java, .NET, Python, Groovy, Php etc.)
+CRUD -> 
+Waiter -> Frontend Applications (HTML, CSS, JS, ReactJS, NodeJS)
+Captain -> Load Balancer
+
+1 tier
+=======
+Single linux -> frontend+backend and Database
+
+2 tier
+=======
+2 Linux Servers
+
+3 Tier
+=======
+3 Linux servers
+
+Load Balancer -> Frontend -> 	Backend 						-> Database
+
+	Web/Frontend/HTTP		  App/Backend/Middleware Tier		-> Database tier
+Database
+=========
+MSSQL
+MySQL
+Postgress
+Oracle
+Kafka
+MongoDB
+
+install database, upgrade, backup,restore, create schemas, monitor, scale them, clustering the databases, etc...
+
+Backend
+========
+Java, nodeJS, Python, Php, .NET
+
+Frontend
+========
+HTML, CSS, JS, Mobile app
+
+Redhat-9-DevOps-Practice
+ami-0220d79f3f480ecf5
+
+ec2-user
+DevOps321
+
+1. structured
+2. semi structured
+3. un structured
+
+
+127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 200 2326 -> semi structured
+
+key -> value
+client ip: 127.0.0.1
+client name: frank
+timestamp: 10/Oct/2000:13:55:36 -0700
+method: GET
+resource: apache_pb.gif
+status: 200
+
+DBMS and RDBMS
+==============
+RDBMS -> Relation Between tables
+
+joindevops -> 1 or many -> 1 or many courses -> 1 or many batches -> 1 or many students
+
+1 or many trainers
+===================
+
+trainer_id 		name	email			mobilenumber		aadhar
+	1			Siva	info@gmail.com	62819378994			1234666
+	
+course
+======
+
+course_id		course_name				course_description		course_code		trainer_id
+1				aiops with devsecops   	linux, admin, devops,	daws-92s		  1
+
+
+username: root
+pasword: ExpenseApp@1
