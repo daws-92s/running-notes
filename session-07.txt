@@ -1,0 +1,134 @@
+Redhat-9-DevOps-Practice
+ami-0220d79f3f480ecf5
+ec2-user
+DevOps321
+
+root
+ExpenseApp@1
+
+Backend
+========
+1. We need to install programming runtime
+2. Create one directory to download the code
+3. created system user
+4. Download the code
+5. Install dependencies/libraries
+6. Create systemctl service files
+
+dnf module list nodejs -> list the nodejs versions available
+dnf install nodejs -> dont know which version is installed
+
+dnf module disable nodejs -y -> disable default version to install
+
+human user -> username/password or username/key
+if we use human/root user to run the application
+
+1.  they have more access in Linux, if one server is compromised their credentials are leaked. more priveleges issue
+2. if hacked, blast radius is more
+3. more files and more folders are on human names
+4. what if the human resigns from company?
+5. auditing and accountability
+
+instead of running applications or services on human credentials we use system user to limit blast radius and least priveleges. system users will not have interactive logins, so no credentials, no login, no shell/terminal access also
+
+useradd --system --home /app --shell /sbin/nologin --comment "expense system user" expense
+
+curl -o /tmp/backend.tar.gz https://raw.githubusercontent.com/daws-90s/expense-documentation/refs/heads/main/artifacts/expense-backend-v3.tar.gz
+
+what are build tools?
+=====================
+1. installing dependencies
+2. repeating steps -> clean old output, download new code, compile the code, installing dependencies, create application
+3. standard project structure
+4. it can automate test cases execution and creation of artifact
+
+developers write lot of files
+download and install dependencies
+compile the code
+run unit tests
+package the application into artifact(.zip, .tar.gz, .jar, .war, .ear)
+
+Build file -> info about the application
+Name, Description, Version, dependencies, how to start the application
+
+Programming			Buildtool		BuildFile		Extension
+Java				Maven			pom.xml				.java
+NodeJs				npm				package.json		.js
+Python				pip				requirements.txt	.py
+
+nodejs
+=======
+which nodejs version we are using -> 24
+what is the build tools -> npm
+what is the build file -> package.json
+what is the directory for dependencies -> node_modules
+package-lock.json -> full dependencies
+
+start/stop/restart/status/enable/disable
+
+dnf install nginx -y -> nginx installed
+systemctl start nginx
+
+our backend app -> customised application developed by us
+it can't start on its own through systemctl
+
+cd /etc/systemd/system
+vim backend.service -> systemctl start backend
+
+who has to run this application
+how to run the application
+does application need any environment like DB URL, Credentials, etc..
+
+[Unit]
+Description=Expense Backend Service
+After=network.target
+
+[Service]
+User=expense
+Environment=DB_HOST=172.31.0.54
+Environment=DB_USER=expense
+Environment=DB_PWD=ExpenseApp@1
+Environment=DB_DATABASE=transactions
+ExecStart=/bin/node /app/index.js
+SyslogIdentifier=backend
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+systemctl start backend
+1. /etc/systemd/system
+2. search for backend.service
+3. execute the start script and inject the environment
+4. User info also will be there to run the service
+
+Public IP vs Private IP
+=======================
+192.168.1.13
+106.205.31.68
+
+IPV4 -> 2^32 -> 4Billion
+
+1. expense category
+2. expense amount
+3. expense date
+4. expense description
+
+id 		category		amount		date			description
+1		food			100			29-SEP-2026		masala dosa
+
+facebook.com -> server
+chrome -> client
+
+mysql-server -> server package
+mysql -> client
+
+mysql -h 172.31.0.54 -u root -pExpenseApp@1 < /app/schema/backend.sql
+
+1. System user
+2. Programming languages, extensions, build tools, build files, what are dependencies
+3. Systemctl service files
+4. Public IP vs Private IP
+5. Backend -> DB Security group firewall allow inbound
+
