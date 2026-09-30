@@ -1,0 +1,244 @@
+Redhat-9-DevOps-Practice
+ami-0220d79f3f480ecf5
+
+1. install programming language nodejs:24
+2. create one directory for application /app
+3. create one system user to run the application expense user
+4. donwload the application as .tar.gz in /tmp directory
+5. extract into /app directory
+6. install dependencies
+7. create systemctl service file
+8. loading the schema in DB
+9. start the application
+
+nodejs file extension
+.js
+package.json -> name, version, description, start scripts, dependencies, etc.
+npm
+npm install
+package-lock.json -> locking the exact dependencies versions and sub dependencies
+node_modules -> all dependencies are here
+
+now a days no need of heavy application servers, applications are coming up with inbuilt light weight servers
+
+Frontend
+==========
+HTML, CSS, JS
+
+Nginx is popular
+* HTTP server
+* LoadBalancer
+* Reverse proxy
+* SSL Termination
+* Caching servers
+
+http://54.205.130.206/ -> Linux server HTTP 80
+
+/usr/share/nginx/html -> nginx default HTML directory
+/usr/share/nginx/html/index.html
+
+/etc/nginx/nginx.conf -> nginx default configuration
+
+http://daws92s.online -> http://54.205.130.206/
+
+http://daws92s.online:81
+
+https://daws92s.online -> https://daws92s.online:443
+
+backend -> 8080
+
+/var/log/nginx -> nginx logs
+
+
+106.200.25.106 - - [30/Sep/2026:02:24:50 +0000] "GET / HTTP/1.1" 200 9466 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0" "-"
+
+
+Forward proxy and reverse proxy
+===============================
+proxy -> on behalf of someone
+
+forward proxy
+
+1. client aware
+2. hiding client identity
+3. VPN
+4. Change geo location
+5. Traffic monitoring and content restriction
+
+
+reverse proxy
+
+1. server aware
+2. hiding the server identity
+3. SSL/TLS termination
+4. Cache
+5. Load Balancing
+
+when there are many servers we need load balancing to queue the requests
+TL -> monitor all the mebers
+how many members are available today
+how much work each work is doing
+
+Delivery manager
+UI Lead -> UI team
+Backend Lead -> Backend team
+DB Lead -> DB team
+
+proxy_http_version 1.1;
+proxy_set_header Host              $host;
+proxy_set_header X-Real-IP         $remote_addr;
+proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+
+location /api/ {
+    proxy_pass http://172.31.24.227:8080/;
+}
+
+location /health {
+    stub_status on;
+    access_log off;
+}
+
+API -> application programming interface
+
+1. /etc/sudoers -> direct changes
+2. /etc/sudoers.d/ -> individual config files
+
+
+http://54.205.130.206/api/transaction
+
+{
+    "result": [
+        {
+            "id": 26,
+            "amount": 1000,
+            "description": "food",
+            "category": "Food"
+        },
+        {
+            "id": 25,
+            "amount": 500,
+            "description": "shopping in mall",
+            "category": "Shopping"
+        },
+        {
+            "id": 24,
+            "amount": 500,
+            "description": "family",
+            "category": "Food"
+        },
+        {
+            "id": 23,
+            "amount": 1001,
+            "description": "movies",
+            "category": "Entertainment"
+        },
+        {
+            "id": 22,
+            "amount": 1000,
+            "description": "Shirt",
+            "category": "Shopping"
+        },
+        {
+            "id": 21,
+            "amount": 700,
+            "description": "travel",
+            "category": "Entertainment"
+        },
+        {
+            "id": 20,
+            "amount": 7000,
+            "description": "Malasiya",
+            "category": "Travel"
+        },
+        {
+            "id": 19,
+            "amount": 15000,
+            "description": "shopping",
+            "category": "Shopping"
+        },
+        {
+            "id": 18,
+            "amount": 1000,
+            "description": "Dinner",
+            "category": "Food"
+        },
+        {
+            "id": 17,
+            "amount": 1500,
+            "description": "Team Outing",
+            "category": "Travel"
+        }
+    ]
+}
+
+http://54.205.130.206/api/transaction
+POST
+{amount: 200, category: "Entertainment", description: "movie"}
+
+HTTP Methods and Status codes
+=============================
+CRUD
+
+GET -> read the information
+URL: http://54.205.130.206/api/transaction
+Method: GET
+
+URL: http://54.205.130.206/api/transaction
+Method POST
+{amount: 200, category: "Entertainment", description: "movie"}
+
+URL: http://54.205.130.206/api/transaction
+Method PUT
+{
+	"id": 17,
+	"amount": 1500,
+	"description": "Team Outing",
+	"category": "Entertainment"
+}
+Updating the information
+
+
+http://54.205.130.206/api/transaction/32
+DELETE
+
+Delete transaction 32
+
+
+http://54.205.130.206/api/transaction/31
+Method: GET
+
+HTTP status codes
+=================
+computer only cares about numbers, humans cant remember numbers
+
+HTTP status codes
+=================
+2XX -> success
+	201 -> created
+	200 -> OK, you got response
+	204 -> No content, info deleted
+	
+4XX -> client side error
+	400 -> bad request
+	401 -> wrong credentials
+	403 -> no authorization
+	404 -> not found
+	
+5XX -> server side error
+	500 -> Internal server error
+	501 -> Not implemented
+	502 -> Bad gateway. frontend is not able to connect backend
+	503 -> service unavailable
+	504 -> backend is not responding on time
+
+1XX -> Information
+3XX -> Redirection
+
+
+{
+	"id": 17,
+	"amount": 1500,
+	"descrition": "Team Outing",
+	"category": "Entertainment"
+}
