@@ -1,0 +1,141 @@
+/etc/nginx/nginx.conf
+/usr/share/nginx/html
+/var/log/nginx
+/etc/nginx/default.d/expense.conf -> expense reverse proxy config
+
+2XX -> success
+3XX -> redirect
+4XX -> client side error
+5XX -> server side error
+
+browser -> frontend -> http://34.227.193.197/api/transaction
+Method: POST
+{
+	amount: 100, 
+	category: "Food", 
+	description: "dosa"
+}
+Response -> 201 Created
+
+backend URL -> http://172.31.17.234:8080/transaction
+
+API testing tools
+
+503 -> service unavailable, like DB down
+201 -> created
+200 -> OK
+404 -> client error
+405 -> not allowed
+400 -> Bad request, input is not correct
+401 -> Unauthorised, No credentials supplied
+403 -> forbidden sent credentials, but wrong credentials.
+500 -> Internal server error
+503 -> Service unavailable
+504 -> Gateway timeout
+502 -> Bad gateway, backend down
+301 -> Moved permanently, we will get new location in response, browsers automatically redirect
+304 -> Not modified, use your old response
+
+frontend -> backend -> database
+30sec
+
+
+
+http://100.31.0.246:8080/transaction
+Method: GET
+get all transactions
+
+http://100.31.0.246:8080/transaction
+Method: POST
+{
+  "amount": 750,
+  "description": "Electricity bill",
+  "category": "Utilities"
+}
+
+http://100.31.0.246:8080/transaction/2
+Method: GET
+get the transaction with ID 2
+
+http://100.31.0.246:8080/transaction/
+Method: DELETE
+delete all transactions
+
+http://100.31.0.246:8080/transaction/4
+Method: DELETE
+Delete transaction 4
+
+systemctl status -> running
+ps -ef -> running
+netstat -lntp -> opened
+
+curl http://localhost:8080/health
+journalctl -u backend
+
+/transactions -> /transaction GET
+
+expense.com/home
+
+http://<FRONTEND_IP>/api/transaction
+http://<BACKEND_IP>:8080/transaction
+
+DNS
+====
+1. login to linux server
+2. change the expense service
+3. daemon-reload
+4. restart
+
+domain name system
+computers use only IP address
+human use domain names
+
+facebook.com ->  104.104.56.87
+
+TLD registry -> top level domain
+
+google.com -> .com
+joindevops.com -> .com
+joindevops.in -> .in
+
+.online, .edu, .us, .uk, .net, .org, .ai, etc..
+
+.in -> Indian government
+.uk -> UK government
+.ai -> Anguilla
+.com -> verisign
+
+TLD -> Nameservers -> Who are manaing your domain IP
+
+What happens when we purchase domain?
+======================================
+registars -> godaddy, hostinger, namecheap, cloudfare, AWS, etc..
+like brokers, resellers, retailers
+
+name, mobile number, email, address, payment
+
+joindevops.com -> checks with TLD whether domain is available or not
+joindevopsssss.com -> available
+
+joindevopsssss.com -> name, mobile number, email, address, payment
+it will update nameservers to TLD
+
+joindevopsssss.com -> 104.56.78.98
+godaddy is manaing domain, so godaddy nameservers are updated with TLD
+
+root servers
+============
+ICANN -> Internet corporation for assignes names and numbers
+if no root servers -> no internet
+13 comapnies -> founded by US government. US gov, US Military, NASA
+
+root servers are tracking TLDS, their details
+if DNS resolvers hits them, they should these details
+
+.devops -> joindevops Mettkom technolgies -> registry
+registars -> godaddy, hostinger, etc..they get commission
+
+
+
+
+
