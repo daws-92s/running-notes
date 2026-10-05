@@ -1,0 +1,91 @@
+1. Domain purchase
+
+registars -> godaddy, hostinger, etc.
+registries -> TLD
+
+registars check availability with TLD
+if available they will take all the details, payment
+domain is booked with TLD
+Nameservers are managed by registars
+We need to update IP address with registar
+
+perm domain -> godaddy, more initial charges
+temp domain -> hostinger, more renewal charges
+ICANN -> DNS regulation
+
+Nameservers
+===========
+byte.dns-parking.com
+pixel.dns-parking.com
+
+daws92s.store -> browser cache -> OS -> OS cache -> DNS resolver -> Root servers -> .store TLD -> hostinger NS -> A record
+
+DNS record types
+================
+A -> IPV4 address
+AAAA -> IpV6 address
+MX -> Mail records, who is managing our mail
+TXT -> domain verification
+CNAME -> you can point to another domain
+NS -> Who is managing this domain
+SOA -> Start of authority
+
+Domain transfer to AWS
+======================
+1. create hostedzone in AWS with same domain name
+2. get the NS records and update in hostinger
+3. Registar updates these NS records with TLD with in 24 hours
+
+TTL -> time to live
+
+TTL -> 1 day
+
+hostedzone
+daws92s.store -> 2.78.65.46
+TTL -> 1 day
+
+within 1 day
+daws92s.store -> 2.78.65.47
+DNS propagation failures
+
+on-premise -> cloud
+servers IP addresses are going to be changed
+TTL present -> 1 day
+TTL -> 1min. gets the record as fresh with TTL 1min
+
+more TTL -> DNS resolution latency is very less
+less TTL -> DNS resolution latency is more
+
+TTL -> 1 day
+atleast before 2 days TTL update to 1min
+DNS propagation will be very fast when IP addresses are updated.
+
+change back TTL to 1 day
+
+rare customers -> 10 days back, TTL is expired. he will get latest IP address
+best customer -> every hour he is using. TTL is still active. he always get old IP address, which is not available
+
+3306
+
+[Unit]
+Description=Expense Backend Service
+After=network.target
+
+[Service]
+User=expense
+Environment=DB_HOST=172.31.27.101
+Environment=DB_USER=expense
+Environment=DB_PWD=ExpenseApp@1
+Environment=DB_DATABASE=transactions
+Environment=ADMIN_TOKEN=admin123
+ExecStart=/bin/node /app/index.js
+SyslogIdentifier=backend
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
