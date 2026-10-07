@@ -1,0 +1,175 @@
+inode symlink and hardlink
+=========================
+person -> name, lastname, dob, adhar, etc
+file/folder
+who is the owner
+which group has access
+what are the permissions
+when is it created
+when is it updated
+size of the file
+
+where is the actual content -> is not part of metadata
+
+ls -li -> you can see inode numbers
+stat <file-name> -> inode info
+
+symlink/softlink
+=========
+shortcut
+Chrome shortcut -> C:\ProgramFiles\*64\Chrome
+
+1. works as shortcut to the file/folder
+2. used for backward compatability
+3. used for version swithching at the time of upgrade
+4. inode number of symlink and actual file is different
+5. if we remove actual file, symlink will break
+
+/home/ec2-user/devops/linux/symlink/symlink.txt
+
+RHEL-8 -> dnf
+upto RHEL-7 -> yum
+
+mobile-1 -> mobile-2
+redirect cals from mobile-1 to mobile-2
+
+prometheus -> 3.15.0
+/home/ec2-user/prometheus-3.15.0.linux-amd64/prometheus
+
+/home/ec2-user/prometheus/prometheus
+
+hardlink
+========
+/home/ec2-user/aws/ec2/sg.txt
+
+1. inode is same for hardlink
+2. used for file backups, even we delete the file, it will not be deleted completely until all the references are deleted
+3. hardlink will not work for folders
+
+
+nodejs
+======
+node_modules
+
+Java
+======
+extension -> .java
+build tool -> maven
+build file -> pom.xml -> name, version, description, dependencies, etc..
+npm install -> mvn package -> ~/.m2/repository
+
+GAV format
+===========
+Group-id, artifact-id, version to refer the component as unique in the universe
+for example com.hdfc is group-id, netbanking is artifact-id, version is 1.2.0
+
+firstname -> ramesh
+lastname -> m
+
+ramesh-m-20260125
+
+roboshop-cart-1.0.0
+
+1.0.0
+1.1.0
+2.0.0
+3.0.0
+
+project -> roboshop
+
+hdfcbank.com
+
+group-id -> com.hdfcbank
+artifact-id -> netbanking
+version -> 1.2.0
+
+com.hdfcbank-netbanking-1.2.0
+
+~/.m2/repository -> common location
+
+http-request -> dependency
+
+http-request-1.0.0
+http-request-2.0.0
+
+/.m2/repository/http-request-1.0.0
+/.m2/repository/http-request-2.0.0
+
+nodejs -> each application has its own node_modules directory inside it
+maven -> maven has common location for dependencies, but it has GAV format to keep different versions of same dependency
+
+app-1/node_modules
+app-2/node_modules
+app-3/node_modules
+
+source code -> compilation -> bytecode -> binary language
+
+nodejs -> no compilation -> at run time, it will compile and execute
+
+JDK vs JRE
+===========
+JDK -> Java development kit -> extra tools and packages
+JRE -> Java runtime envronment
+
+JRE < JDK
+JDK = JRE + extra tools for development
+
+maven lifecycle
+================
+
+source code ->  install dependencies -> compile -> test cases -> bytecode(packing the application)
+build tool -> package the code into artifact
+
+it is a sequential process execution to build the project with different phases like
+
+cleaning the old builds
+install dependencies
+compile the source code
+run the test cases
+package the application -> bytecode
+install the application 
+
+nodejs install -> npm as well
+maven install -> java install
+
+java-21 and java-25
+
+dnf module list nodejs -> available nodejs versions for installations -> we can select which version to install
+
+java-21 and java-25
+
+project-A -> java-21
+project-B -> java-25
+
+maven should know which java and where is it installed?
+
+JAVA_HOME = /usr/lib/jvm/java-25-openjdk
+
+/etc/profile.d/java.sh
+
+mvn clean package
+
+clean -> one of the maven phase, clean the old builds
+package -> validate, test, install dependencies, compile and package
+
+mvn clean package -> target/shipping.jar
+
+recap
+======
+.java
+maven
+pom.xml
+GAV -> group-id, artifact-id, version
+JDK -> development
+JRE -> executing the bytecode
+
+JRE is lightweight, JDK is heavy
+JDK = JRE + development tools
+maven lifecycle
+~/.m2/repository -> this is where get dependencies installed
+mvn clean package -> target folder, inside we can see .jar file
+
+java archive file -> bytecode
+
+
+
