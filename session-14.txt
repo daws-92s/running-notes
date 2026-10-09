@@ -1,0 +1,119 @@
+inode
+symlink
+hardlink -> cant create for directories
+
+Java
+====
+JDK and JRE
+JDK -> development
+JRE -> running java application
+
+JDK = JRE + additional development libs
+
+maven
+GAV -> group id, artifact and version
+clean package
+clean the old builds, validate the code, install dependencies, compile the code, run the test case, package the code
+target -> .jar file artifact
+~/.m2/repository
+
+dnf install python3.14 python3.14-pip -y
+python3.14 --version
+
+dnf module list python -> deprecated by RHEL
+
+python
+=====
+file extension -> .py
+build tool -> pip
+build file -> requirements.txt
+pip install requirements.txt -> read the file and install the dependencies -> this will install in common directory inside system
+
+http-request -> 1.3.0
+http-request -> 1.5.0
+
+venv -> own dependency versions are stored inside app directory
+
+nodejs every app directory has its own node_modules
+
+python3.14 -m venv /app/.venv
+
+Oct 09 02:20:17 ip-172-31-40-21.ec2.internal dispatch[18827]: 
+
+{"time":"2026-10-09T02:20:17.194902435Z","level":"INFO","msg":"order received","service":"dispatch","requestId":"976d5e922aa907e3935e58786655033b","orderid":"42232f35-b2d0-44fc-95f0-7247cb3ffc29","user":"sivakumar","items":1,"total":1338.55}
+
+Oct 09 02:20:17 ip-172-31-40-21.ec2.internal dispatch[18827]: {"time":"2026-10-09T02:20:17.695676889Z","level":"INFO","msg":"order dispatched","service":"dispatch","requestId":"976d5e922aa907e3935e58786655033b","orderid":"42232f35-b2d0-44fc-95f0-7247cb3ffc29","trackingId":"RS0564201606","durationMs":500}
+Oct 09 02:20:17 ip-172-31-40-21.ec2.internal dispatch[18827]: {"time":"2026-10-09T02:20:17.696430719Z","level":"INFO","msg":"order received","service":"dispatch","requestId":"5254ab50b8421f1e0ba43bf9f8473b7d","orderid":"bb9f3a39-5b92-48ce-aa6f-0e5baf48ba06","user":"sivakumar","items":1,"total":2828.7}
+Oct 09 02:20:18 ip-172-31-40-21.ec2.internal dispatch[18827]: {"time":"2026-10-09T02:20:18.197164502Z","level":"INFO","msg":"order dispatched","service":"dispatch","requestId":"5254ab50b8421f1e0ba43bf9f8473b7d","orderid":"bb9f3a39-5b92-48ce-aa6f-0e5baf48ba06","trackingId":"RS0107229508","durationMs":500}
+
+file extension?
+build tool?
+build file?
+where dependencies are stored?
+build command
+where is the artifact created?
+
+disk management
+==============
+1. How to add extra disk
+2. How to increase existing disk size
+
+by default EC2 comes with one root disk. when you delete the instance root disk also will be deleted...
+
+add an extra disk to store the information. root disk will have OS related configurations. extra disk will have app related configs
+
+us-east-1d -> AZ
+EBS volume -> HD, it should near to the server
+it should be in the same AZ as your instance
+
+filesystem -> files are stored as 0 and 1s in hard disk. filesystem is responsible to read the bytes and show to user in understandable format
+
+sudo mount /dev/nvme1n1p1 /data
+
+df -hT -> display hard disk information
+
+UUID=edda71d1-1b1a-4fd5-810c-59d706bf2836   /data   xfs   defaults,nofail   0   23
+
+df -hT -> hard disk size and folders check
+free -m -> ram free memory check
+du -sh * -> disk utilisation inside any directory
+
+Linux directories heirarchy
+===========================
+afs -> andrew file system, to share the files between multiple hosting using network as if they are local files
+/bin -> all commands we are using are here..
+/boot -> it has files required to boot linux server. vmlinuz-* is related to kernel, initramfs -> ram. grub2 is the boot loader
+/dev -> devices. all the devices including disks, keyboard, mouse are here
+
+/etc -> extra configuration.. /etc/users, /etc/group, /etc/nginx, /etc/yum.repos.d, /etc/systemd, /etc/sshd, /etc/sudoers, /etc/passwd
+
+/home -> this is where every user get their personal space /home/ec2-user /home/ramesh users home directory
+
+/lib -> system libraries
+
+/media -> in linux desktop environments, removable disks like USB, cd/dvd, hd will be automatically mounted in desktop environments
+
+/mnt -> if we add extra disk, we can manually mount the disk here...
+
+/opt -> optional. if we download and install third party softwares, we choose this directory
+
+/proc -> kernel uses this directory to track process instance ID's
+		/proc/cpuinfo
+		/proc/meminfo
+		
+/root > root user home directory
+
+/run -> programs running inside server keeps track of their process here
+
+/sbin -> system administration commands are here
+
+/srv -> no one is using now, actually intended to keep the shared data for the services.. service files /usr/share/nginx/html.. 
+
+/swap -> virtual ram..if it is used it means ram is full
+
+/tmp -> temporary files..
+
+/var -> variable data, logs
+
+/var/logs ->
+/var/lib/docker
