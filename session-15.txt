@@ -1,0 +1,123 @@
+manual deployment
+=================
+1. only source documentation
+2. time taking process
+3. Human mistakes
+4. can't restore if something goes wrong
+5. who changed, identification is also tough
+
+we need scripting to automate the process and address all the above issues...
+
+1. no security
+2. no backup
+3. 1.0.0, 1.1.0, 2.0.0 we need version control
+4. colloboration
+5. review mechanism
+6. tracking
+
+solid version control system or source code management is required to manage the programs
+
+VCS/SCM
+
+Git -> storage of source code
+Google Drive -> file/object storage
+Artifact repository -> artifacts storage
+
+what is repository? -> storage of something
+
+create repository in github.com
+clone the repository in local -> a copy of repository
+open vscode, open folder in file menu
+
+IDE -> Integrated development environment to develop the code in easy way
+
+Shell scripting is native scripting in Linux servers
+
+Shebang
+=======
+#!/bin/bash -> it should be the first line in shell script
+
+shebang is the interpreter to execute the commands inside shell script, without this linux does not understand how to execute your script
+
+shell script == bash script
+
+1. add to staging/temp area
+2. commit to local repository
+3. push to remote repository
+
+git add 01-hello-world.sh -> this adds file to the staging/temp area
+git commit -m "my first shell script" -> commit the code to local repo
+git push origin main -> code is pushed to remote repository
+
+for first time git users
+========================
+ git commit -m "my first commit"
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'siva@LAPTOP-AAIF3H01.(none)')
+
+git push, it asks for authentication
+
+sign with browser
+
+folder vs git repo
+=================
+if the folder has .git it is called as git repo
+if the folder does not have .git it is just a normal folder
+
+imp file -> need changes -> create another copy => do the changes -> show to TL -> if he is okay, then proceed
+
+git init
+git branch -M main
+git add .
+git commit
+git remote add origin <URL>
+git push origin main
+
+DRY -> Don't repeat yourself
+X=0, Y=1
+
+derive the formula
+
+finally substitute the values
+
+1. hold the values against variable name
+2. if you change in single place, it will be effected everywhere wherever you refer
+3. prevent accidental changes
+
+variables
+data types
+conditions
+functions
+loops
+error handling
+
+sh 04-variables.sh John Raheem
+
+John Raheem -> arguments/args/parameters to the script
+
+$1=John
+$2=Raheem
+
+Script executed at: 08:34AM
+Script completed at: 08:35
+Total time for execution is 1min
+
+How will you execute a command and take output into variable
+
+START_TIME=$(date +%s)
+
+sh 06-script.sh sivakumar siva123
+
+special variables
+==================
