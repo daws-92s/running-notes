@@ -1,0 +1,178 @@
+1. algorithm -> plain english, what we need
+2. psudo code -> simple steps
+
+90% thinking, 10% syntax
+
+#!/bin/bash
+variables -> DRY
+	in the script VAR=value
+	sh script.sh DevOps AWS AIOps
+	$1=DevOps
+	$2=AWS
+	$3=AIOps
+	
+	through read command -> user can enter the value, it will allocated to the variable
+	VAR=$(command)
+	
+special variables
+=================
+shell handover to us few variables to use directly.
+
+echo "All args passed to the script: $@"
+echo "Number of args passed to the script: $#"
+echo "First variable passed: $1"
+echo "Script name: $0"
+echo "Realpath: $(realpath $0)"
+echo "Who is running current script: $USER"
+echo "Directory of the current script: $PWD"
+echo "Home directory of the current user: $HOME"
+echo "PID of the current script: $$"
+sleep 10 &
+echo "PID of the command running in background now: $!"
+wait $! # script waits until $! command complete
+echo "Line number: $LINENO"
+echo "previous command exit status: $?"
+echo "Total time executed for this script: $SECONDS"
+
+$@ -> it will give us all the args passed to the script
+
+exit status
+============
+if we wwant to know the status of previous command, we can use $?
+0 -> success
+1-127 -> failure
+
+environment variables
+=====================
+export COURSE="Shell Script" -> works until the session is alive, sub process also can refer, if logout session is gone, variable is also gone..
+
+/home/ec2-user
+~/.bashrc -> works only for ec2-user
+export COURSE="Shell Script"
+export DURATION="10 Hrs"
+source ~/.bashrc
+
+/etc/profile.d/*.sh -> works for all users
+COURSE="AIOps with DevSecOps on AWS"
+
+snake case -> user_id
+env -> all environment variables Linux give us, including the one we loaded
+
+variables
+data types
+conditions
+loops
+functions
+error handling
+
+Sivakumar Reddy M
+===================
+name: siva -> string
+mobile: 6281937079 -> number
+Indian: yes -> boolean
+Skills: DevSecOps, AWS, AIOps, Cloud -> list
+
+int, float, double, long, char, string, boolean, array, array list, set, map, etc...
+
+ariane 5
+ariane 4 -> previous generation rocket
+70, 71, 72 -> integer
+
+ariane 5 -> 70.1, 70.2
+
+int speed = "value comes from engine"
+int speed = "exact value comes from engine"
+
+shell does not have any data types, by default shell treats everything as string.
+
+$VAR
+${VAR}
+
+conditions
+===========
+tell me a number is even or odd -> if a number is divisible by 2 it is even, otherwise odd
+
+1. you know problem and solution
+2. you dont know solution, but you know coding
+
+123
+
+123/2 -> 1
+
+if remainder is 1 -> odd
+if remainder is 0 -> even
+
+1. what is the number?
+2. is that divisible by 2, means remainder is 0 -> then even
+3. if remainder is not 0. then it is odd
+
+psudo code
+==========
+1. start
+2. get the number
+3. divide it by 2, get the remainder
+
+if(remainder is 0){
+	print number is even
+}
+else{
+	print number is odd
+}
+
+if(expression){
+	this will run if expression is true
+}
+
+if(expression){
+	this will run if expression is true
+}
+else if(expression){
+	this will run if expression is true
+}
+else if(expression){
+	this will run if expression is true
+}
+else if(expression){
+	this will run if expression is true
+}
+else if(expression){
+	this will run if expression is true
+}
+
+else{
+
+}
+
+
+less than 33 -> fail
+greater than or equal to 33 but less than 50 -> third class
+greater than or equal to 50 but less than 60 -> second class
+greater than or equal to 60 but less than 75 -> first class
+greater than or equal to 75 -> distinction
+
+install a package
+
+dnf install nginx -y
+
+algorithm
+=========
+start
+check if the user running has sudo access
+if yes, proceed
+no, error
+
+install the package
+$? -> 0 success
+not 0 -> failure
+
+start
+get the user_id
+if user_id is 0, then it is root, procced
+if not 0, then error end it
+
+if 0, then install the package
+check exit status, if 0 -> success
+if not 0 -> show failure
+
+it is our responsibility to check every command is success or not in shell
+
