@@ -1,0 +1,103 @@
+Variables
+Data types
+Conditions
+Functions
+Loops
+Error handling
+
+Algorithm
+Psudo code
+
+Syntax
+
+Shell by default not exit when error comes, it is our responsibility to check previous command exit status
+$?
+0 -> success
+not 0 -> failure
+
+less lines, more clarity, more readable -> good
+more lines, less clarity, less readable -> bad
+
+we can keep repeated code in a function. function is meant by a single task execution. 
+function takes input and give us output..
+
+FUNC_NAME(){
+	$1 = input-1
+	$2 = input-2
+	repeated code
+}
+
+FUNC_NAME "input-1" "input-2" "input-3"
+
+redirections
+============
+> symbol is for redirection
+>> -> append
+
+1 -> success
+2 -> error
+
+ls -l > output.log == ls -l 1> output.log
+
+ls -ldfjdsUHFRDF 2> output.log
+ls -l &> output.log
+
+/var/log/shell-practice/13-logs.sh.log
+
+for(int i=0; i<=100; i++){
+	echo $i
+}
+
+set int i=0
+evaluate expression i<=100
+0
+
+i=1
+i<=100
+print 1
+
+i=99
+i<=100
+print 99
+
+i=100
+i<=100
+print 100
+
+1. known errors -> handle
+2. unknown errors -> we can't handle
+
+Programatical
+====
+Software development kit
+
+login
+launch instance
+	name
+	ami
+	instance_type
+	security_group
+	hard disk
+	key
+	
+aws ec2 run-instances \
+    --image-id ami-0220d79f3f480ecf5 \
+    --instance-type t3.micro \
+    --security-group-ids sg-043444d172056acbd \
+	--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roboshop-mongodb}]'
+
+
+coding
+=======
+1. programming -> developers
+2. scripting -> devops/plsql
+
+command-1 | command-2
+
+create sg
+give it to launch instance
+
+
+
+
+
