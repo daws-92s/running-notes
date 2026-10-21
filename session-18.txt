@@ -1,0 +1,77 @@
+aws ec2 run-instances \
+    --image-id ami-0220d79f3f480ecf5 \
+    --instance-type t3.micro \
+    --security-group-ids sg-043444d172056acbd \
+	--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roboshop-mongodb}]'
+	
+roboshop-commmon SG should be attached to all the instances, only one inbound rules
+allow 22 from My IP
+
+roboshop-mongodb -> roboshop-mongodb + roboshop-commmon
+roboshop-redis -> roboshop-redis + roboshop-commmon
+
+write a script that creates roboshop EC2 instances and update R53 records
+
+roboshop.sh mongodb redis mysql rabbitmq catalogue
+
+ami-id, instance-type, no-key, sg-ids, domain-name, hosted-zone-id
+
+once instance is started, we need to get ip address. if frontend take public ip, if not take private ip
+
+mongodb.daws92s.store -> private ip
+daws92s.store -> public ip
+
+aws ec2 run-instances \
+    --image-id ami-0220d79f3f480ecf5 \
+    --instance-type t3.micro \
+    --security-groups "roboshop-common" \
+	--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roboshop-shell}]' \
+	--query 'Instances[0].InstanceId' \
+    --output text
+	
+aws route53 change-resource-record-sets \
+  --hosted-zone-id $hosted_zone_id \
+  --change-batch '{
+    "Changes": [
+      {
+        "Action": "UPSERT",
+        "ResourceRecordSet": {
+          "Name": "$r53_record_name",
+          "Type": "A",
+          "TTL": 1,
+          "ResourceRecords": [{"Value": "$IP"}]
+        }
+      }
+    ]
+  }'
+
+sed editor
+==========
+non interactive changes
+sed -e -> temp changes
+sed -i -> perm changes
+
+1a -> append after line 1
+1i -> insert before line 1
+
+sed -e 's/sbin/SBIN/g' users -> update
+sed -e '1c Hello SED' users -> change line number 1
+
+sed -e '/^mail/c Hi I am changing' -> change line which starts with the word mail
+
+CRUD
+===
+
+
+https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/cart-v4.zip
+
+https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/catalogue-v4.zip
+
+sh robosho.sh mongdb
+
+sh robosho.sh create/delete mongodb
+
+sh roboshop.sh create all
+sh roboshop.sh delete all
+
+sh roboshop.sh create all mongdob redis
