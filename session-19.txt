@@ -1,0 +1,26 @@
+ami-0055977a6e828a4f4
+Redhat-9-DevOps-Practice
+
+aws ec2 run-instances \
+    --image-id ami-0055977a6e828a4f4 \
+    --instance-type t3.micro \
+    --security-groups "roboshop-common" \
+	--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roboshop-shell}]' \
+	--query 'Instances[0].InstanceId' \
+    --output text
+	
+idempotency
+============
+a script or program should give same result irrespective of the number of times we run or retries
+
+CRUD
+
+status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health)
+
+mysql -h mysql.daws92s.store -u root -pRoboShop@1 -e "SELECT COUNT(*) FROM cities.cities;"
+
+mysql -h mysql.daws92s.store -u root -pRoboShop@1 -e "SELECT COUNT(*) FROM cities.cities;"
+mysql: [Warning] Using a password on the command line interface can be insecure.
+ERROR 1049 (42000) at line 1: Unknown database 'cities'
+
+
