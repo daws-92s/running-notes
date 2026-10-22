@@ -1,0 +1,6 @@
+mysql -h mysql.daws92s.store -u root -pRoboShop@1 -N -B -e "SELECT COUNT(*) FROM cities.cities;"
+
+How you call another script from current script?
+================================================
+1. directly calling sh <script-name> here 2nd script cant access firt script environment because PID are different
+2. by running source <script-name>. here 2nd script will come into first script process. so 2nd script can access 1st environment completely
