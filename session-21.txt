@@ -1,0 +1,70 @@
+We have logs continously writing. logs size will become more occupies too much space in disk.
+
+we need daily maintainance
+
+/var/log/roboshop
+
+14 days old .log files should be deleted
+
+touch -d 20260101 cart.log
+touch -d 20260101 shipping.log
+touch payment.log
+touch shipping.java
+touch -d 20260202 user.js
+
+which location?
+what extension?
+how many days old?
+
+sh cleanup.sh /var/log/roboshop 14
+is user passing location or not?
+if passed, check whether the location exist or not
+
+find the *.log files which are more than 14 days old
+
+find . "*.log"
+
+1. check user passed source dir or not
+2. check source dir exist or not
+3. find the files
+4. if there are no files found, just print files not found older than 14 days
+5. delete files if exist and show to user
+
+crontab
+=========
+crontab is used to schedule the scripts in linux. generally schedules are at less traffic times..
+
+* * * * * -> every min
+
+source_dir, destination_dir
+
+1. check user gave source_dir and destination_dir
+2. check whether directories exist or not
+3. find the files
+4. compress them and place in destination_dir
+5. if successfully placed, delete in source_dir
+6. if error dont delete the files
+
+expression = [ -z "$source_dir" ] && [ -z "$dest_dir" ]
+
+&& -> both should be true, then overall expression is true
+&& -> one is true, one is false, then overall expression is false
+|| -> one is true, one is false. then overall expression is true
+
+logs-2026-10-23-02:40:53.tar.gz
+
+date +%Y-%m-%d-%H-%M-%S
+
+/home/ec2-user/.local/bin:
+/home/ec2-user/bin:
+/usr/local/bin:
+/usr/bin:
+/usr/local/sbin:
+/usr/sbin
+
+/usr/bin:/bin
+
+crontab $PATH is different, terminal path is different. crontab path is minimal
+
+development servers, worked. crontab path is set to /usr/local/bin
+prod servers, failed. crontab path is not set to /usr/local/bin
