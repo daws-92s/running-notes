@@ -1,0 +1,90 @@
+1. get the output
+2. go through output each line
+3. check if it is more than threshold, usually 75%
+4. if it is more than 75% get the partition
+5. go through all lines and collect the information
+6. then send an alert
+
+shell disadvantages
+===================
+1. no idempotency
+2. no error handling
+3. shell is imperative, commands should be in order
+4. can't handle at a scale
+5. Homogenous -> works only for specific distro
+6. can't store secrets securely
+
+ssh ec2-user@172.31.31.45 -C "touch /tmp/devops.txt"
+non-interactive login
+
+ansible -> configuration management
+
+configuration
+==============
+plain server -> ready to host application
+
+1. installing programming language
+2. creating system user
+3. creating app directory
+4. downloading code
+5. unzipping code
+6. installing dependencies
+7. creating systemctl service files
+8. loading data if necessary
+9. starting the server
+
+CRUD
+reading the configuration -> what is there inside server
+updating the configuration -> update the script and run it
+delete the configuration -> write the script and run it
+
+Push vs Pull
+=============
+
+HYD -> Delhi
+
+1. daily goto DTDC office and check whether got courier -> pull/poll
+2. stay home, when you get courier. you will get the delivery -> push
+
+1. un necessary traffic
+2. waste of resources
+
+inventory -> list of items
+
+Linux command == Ansible module/Collection
+
+ansible adhoc command -> emergency purpose targeting one time simple task
+
+ansible all -i 172.31.31.45, -e ansible_user=ec2-user -e ansible_password=DevOps321 -b -m dnf -a "name=nginx state=installed"
+
+repetitive -> we will keep all the modules in a file called playbook. It is YAML based
+
+YAML -> Yet another markup language
+HTML -> Hyper text markup language
+XML -> Extensive markup language
+JSON -> Java Script object notation
+
+DTO -> Data transfer objects
+
+HTML
+=====
+<h1>Sivakumar Reddy M</h1>
+<h2>DevOps Engineer</h2>
+
+date, acc number, denomination, name, branch, sign
+acc number, denomination, date, name, sign, branch
+
+forms
+======
+template
+
+key -> value
+
+firstname = sivakumar
+lastname = m
+skill = devops
+dob = 01-01-01
+
+
+
+
