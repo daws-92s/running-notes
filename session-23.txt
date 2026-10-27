@@ -1,0 +1,31 @@
+1. code
+2. configuration
+
+aws ec2 run-instances \
+    --image-id ami-0055977a6e828a4f4 \
+    --instance-type t3.micro \
+    --security-groups "roboshop-common" \
+	--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roboshop-frontend}]' \
+	--query 'Instances[0].InstanceId' \
+    --output text
+	
+DTO -> data transfer objects
+
+[] -> List
+{} -> map/object
+
+ansible everything is module or collection.
+
+inventory -> machines ansible is targeting
+
+dnf install nginx
+
+variables
+data types
+conditions
+loops
+functions
+error handling
+
+variables
+=========
