@@ -1,0 +1,67 @@
+aws ec2 run-instances \
+    --image-id ami-0055977a6e828a4f4 \
+    --instance-type t3.micro \
+    --security-groups "roboshop-common" \
+	--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roboshop-ansible}]' \
+	--query 'Instances[0].InstanceId' \
+    --output text
+
+variables == facts
+gather facts -> gather target machine facts/variables
+
+ansible configuration
+=====================
+/etc
+default -> /etc/ansible/ansible.cfg
+
+1. ANSIBLE_CONFIG env variable
+2. current working directory -> use this
+3. home directory with .ansible.cfg
+4. /etc/ansible/ansible.cfg
+
+data types
+==========
+number string boolean list map/dictionary
+
+string int bool float list dict
+
+conditions
+===========
+whether task should run or not?
+
+when is the keyword to write condition
+
+loops
+=====
+keyword: loop
+
+functions == filters
+==========
+we cant write functions by default, if we want we need to write python code
+
+filter -> |
+Full Name = Sivakumar Reddy Mettukuru
+
+Error Handling
+==============
+known errors -> handle
+un-known errors -> should not handle
+
+if ansible does not have any module, just use linux command or shell script
+
+check user exist or not
+if exist dont create, does not exist create
+
+user_id=$(id roboshop)
+
+if you run command and take output into a variable in ansible, we can use register keyword
+
+rc == 0 -> SUCCESS
+rc !=0 -> FAILURE
+
+- Ramesh
+- Suresh 
+- Raheem
+
+roboshop-common -> port 22 from my ip
+roboshop-frontend(SG), roboshop-common -> port  80 from 0.0.0.0/0

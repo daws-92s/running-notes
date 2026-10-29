@@ -1,0 +1,28 @@
+variables -> {{ }}
+data types -> int float string list - [ or - map -> {
+conditions -> when
+loops -> loop, {{ item }}
+functions/filters -> for data manipulation
+error handling -> ignore_errors: true
+
+ansible has idempotency -> when we use ansible modules only
+
+we can use command module or shell module if there are no ansible modules available
+
+shell vs command
+=================
+both executes commands on remote host
+1. if we use shell we get full access to the server means its env and variables
+
+2. command module will not have any access to server env and variables, it will just execute the command. redirections and pipes will not work here in command module
+
+for simple commands use command module, for complex commands with redirections and pipes and if we need env then use shell module
+
+pip3.9 install botocore boto3
+
+ec2_output.results -> list
+loop the list, first item we get mongodb
+
+{{ item.instances[0].private_ip_address }}
+
+group_vars -> same like inventory variables
