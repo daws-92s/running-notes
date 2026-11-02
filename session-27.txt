@@ -1,0 +1,54 @@
+& -> take the process into background
+nohup <command> & -> takes the process into background, it will run even the session ends
+
+mysql -h "mysql.$domain_name" -u root -pRoboShop@1 -N -B -e "SELECT COUNT(*) FROM cities.cities;"
+
+rc = 0 or count = 0
+
+How can run specific tasks in ansible-playbook?
+using tags
+
+python3.14 -m venv /app/.venv
+/app/.venv/bin/pip install -r requirements.txt
+
+- name: Install bottle into the specified (virtualenv), using Python 3.13
+  ansible.builtin.pip:
+    requirements: /app/requirements.txt
+    virtualenv: /app/.venv
+    virtualenv_command: python3.14 -m venv
+	
+if the code is repeated, we created a common.sh file kept all the repeated code as functions and call the functions when required
+
+Ansible Roles - V2
+=============
+Dont store passwords as plain text
+Organise playbooks
+
+Roles is a proper directory structure of creating and managing playbooks. We can breakdown playbooks into multiple components like
+
+by default ansible loads main.yaml
+
+roles
+	catalogue
+		tasks/
+		- main.yaml -> all tasks will be here
+		vars/
+		- main.yaml -> all role related variables are here
+		defaults/
+		- main.yaml -> low priority variables are here
+		templates/
+		- *.j2 -> jinja2 templates are here
+		files/
+		handlers/         #
+        - main.yml      #  <-- handlers file
+		meta/
+		- *.yaml -> all dependencies are here
+		library/          # roles can also include custom modules
+        module_utils/     # roles can also include custom module_utils
+        lookup_plugins/   # or other types of plugins, like lookup in this case
+		
+
+module/task vs plugin
+module -> runs in target server
+plugin -> runs on ansible controller for external tasks like fetching secrets, etc..
+
