@@ -1,0 +1,19 @@
+aws configure
+pip3.9 install botocore boto3 (AWS SDK for python connect AWS)
+
+Ansible Controller -> Ansible server
+remote machine -> catalogue
+remote_src: yes -> file already exist on remote server
+if not -> ansible tries to unarchive the file from its server 
+
+deployment
+==========
+1. remove the old code
+2. download the new code
+3. restart the server
+
+alternatives --config java
+alternatives --set java <path>
+
+export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java)))
+JAVA_HOME=/usr/lib/jvm/java-25-openjdk
