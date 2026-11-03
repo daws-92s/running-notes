@@ -1,0 +1,7 @@
+ansible vault
+=============
+we can keep the credentials encrypted in ansible-vault. while executing ansible can decrypt and use those credentials
+
+ansible-vault create vault.yaml
+
+handlers are notifiers. when there is a change in particular task, if you want to inform/notify other task we can use handlers. for example if there is change in nginx config we can notify nginx restart handler
