@@ -1,0 +1,61 @@
+Ansible Roles
+==============
+a standard directory structure to properly create and manage playbooks. we can create playbook into tasks, vars, defaults, files, templates, handlers, meta, plugins, modules, utils, etc..
+
+by defaults ansible loads main.yaml in all the folders
+
+ansible-vault -> encrypting confidentail information. we need to provide vault password in the command line or in the file stored inside server for decryption.
+
+ansible-vault create vault.yaml
+
+AWS secrets manager -> PAAS
+===============
+key -> value pairs, but confidentail information. AWS takes care of encryption.
+
+ansible fetch the values from secrets manager
+
+include_role
+import_role
+
+include role will not parse the playbook before execution, it will check dynamically
+import role parse the playbook before execution, if there is any error it will not execute
+
+when: condition is copied to every task in import_role and checked before executing every task again. include_role -> checked only once at the include level, it will not validate again at task level even the values changes
+
+tags: include_role. it will check at include level and task level both
+
+conditions and tags applied at import level will be automatically applied to all the tasks. but include level it will not be applied at task level
+
+loops works in include_role, loops will not work in import_role
+
+-> import checks for errors before execution, include will check dynamically
+-> conditions and tags applied at import level will be applied automatically at taks level. but include it will not apply automatically at task level.
+-> loops will work in include, but not in import
+
+dynamic inventory
+================
+aws ec2 run-instances \
+    --image-id ami-0055977a6e828a4f4 \
+    --instance-type t3.micro \
+    --security-groups "roboshop-common" \
+	--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roboshop-frontend}]' \
+	--query 'Instances[0].InstanceId' \
+    --output text \
+	--count 10
+	
+ansible first query the region, running instances, search for frontend, then the get the IP address -> AWS dynamic inventory plugin
+
+inventory file should be *.aws_ec2.yaml
+
+parellelism
+===========
+forks -> how many servers ansible can connect at a time. each task executes in batches
+serial -> 2. playbook runs against 2 servers first. again next 2 servers entire playbook
+
+100 -> servers. connect to all the servers, delete the code and download new code then restart
+
+pick 10 servers -> connect to all the servers, delete the code and download new code then restart
+
+10 servers down, 90 servers up
+10 new code servers, 90 old code servers
+20 new code servers, 80 old code servers
