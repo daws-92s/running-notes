@@ -1,0 +1,77 @@
+dynamic inventory
+=================
+select the region
+filter with running instances
+filter with frontend instances
+get the IP address
+
+goto console, update the name
+
+create infra with ansible 
+=========================
+-> ansible can create infra
+-> ansible can't update the infra
+-> ansible can't delete the infra
+
+declarative way of creating infra
+-> whatever we write we need it -> terraform can do this
+
+terraform has something called state. state is like memory. It can understand what it had creating earlier, what user wants now. it can compare and take the action
+
+terraform/IaaC advantages
+===================
+1. version control with infra as a code
+2. declarative way of creating infra, provided we use right syntax
+3. consistent infra -> lower env are ignored than PROD. working in DEV not working in PROD
+4. Reusable infra -> modules. we can use same code to create infra across different projects
+5. Dependency management -> terraform can identify dependency between the resources
+6. CRUD -> create read update delete the infra
+7. inventory management -> we can read the terraform resources and understand what we are using
+
+code and configuration(changes for every environment)
+
+ansible -> module/collection/task
+terraform -> providers
+
+provider is like a plugin that lets terraform to interact with any platform API.
+
+before writing terraform code we need to write provider
+
+HCL -> Hashicorp configuration language
+everything is in braces
+
+<type-of-block> {
+	key = "value"
+}
+
+resource data variable provider output module
+
+name, ami, instance-type, key, sg select -> launch
+aws-cli
+ansible module
+
+resource "aws_instance" "roboshop-mongodb" {
+	name = "roboshop-mongodb"
+	ami = "ami-1234"
+	instance-type = "t3.micro"
+	key = "daws92s"
+	sg-name = "roboshop-mongodb"
+}
+
+terraform init -> read the provider and download the provider
+terraform plan -> it will check the syntax and understand what you are trying to do
+terraform apply -> now it will apply the infra
+
+name=terraform
+
+vars:
+	course: terraform
+	
+number, string, list, map, boolean
+123 -> number
+"123" -> string
+["apple","banana"] -> list
+{ -> map
+	course = "terraform"
+	duration = "10hrs"
+}
