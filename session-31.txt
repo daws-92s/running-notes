@@ -1,0 +1,110 @@
+ansible is for configuration management. ansible is not great to update and delete the infra
+
+IaaC tools like terraform follows declarative way of creating infra
+1. version control infra
+2. reusable code called modules
+3. CRUD
+4. Inventory management
+5. Cost effective
+6. Dependency management
+7. consistent infra
+
+providers -> a plugin that let terraform to connect with platform API to CRUD the resources
+
+everything is block in terraform.
+
+resource, variable, terraform, provider, output, data, etc etc.
+
+resource "type_of_resource" "name_you_give" {
+	key = "value"
+}
+
+terraform init -> downloads provider file into .terraform folder
+terraform plan -> reads tf files and gives us what is going to do
+terraform apply -> applies the infra
+terraform destroy -> delete the infra
+
+variable "variable_name" {
+	type = string/number/map/boolean/list
+	default = "default_value"
+}
+
+default, *.tfvars, command line, env variables, prompt
+
+terraform plan/apply -var-file=dev.tfvars
+env variables
+
+export TF_VAR_instance_type="t3.micro"
+set TF_VAR_<var_name>="value"
+
+1. default values
+2. terraform.tfvars or *.tfvars
+3. env variablees
+4. command line
+5. prompt
+
+default -> t3.micro
+terraform.tfvars -> t3.small
+env variable -> t3.medium
+command line -> t3.large
+
+prefernce
+===========
+1. command line
+2. tfvars
+3. env variable
+4. default
+5. prompt
+
+conditions
+===========
+key = expression ? "true_value" : "false_value"
+
+PROD -> t3.large
+DEV -> t3.micro
+
+loops
+======
+1. count based loop
+2. for_each
+3. dynamic
+
+instance_name = roboshop-dev-mongodb
+SG_names = roboshop-dev-mongodb, roboshop-dev-common
+
+interpolation -> you can mix normal text with variable value in double quotes
+===========
+"${var.project}-${var.environment}-common"
+
+count based loop
+================
+count = 10
+count.index -> 0,1,2,3...9
+
+aws_instance.roboshop[9]
+
+aws_instance.roboshop
+
+R53, Ec2, SG
+
+SG, EC2, R53
+
+functions
+=============
+in terraform we cant create custom functions. we can only terraform functions
+
+takes input and gives output
+
+length(list) -> calculate number of items in the list and give us the count
+
+list of items -> do you have apple in your list ? yes : no
+
+fruits = ["apple","banana","pomo","guava","grapes"]
+
+contains(fruites, "watermelon") -> true
+contains(fruites, "pomo") -> false
+
+index(fruits, "banana") -> 1
+index(fruits, "berries") -> negative value
+
+FUN_NAME(inputs) -> output
