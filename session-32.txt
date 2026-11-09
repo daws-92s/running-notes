@@ -1,0 +1,150 @@
+everything is block in terraform
+
+"block-name" {
+
+}
+
+resource "type_of_resource" "name_of_resource" {
+	key = "value"
+}
+
+provider -> a plugin that let terraform interacts with platform API
+
+terraform init
+terraform plan
+terraform apply
+terraform destroy
+
+variable "name_of_variable" {
+	type = number/string/bool/list/map
+	default = "default_value"
+	description = "description"
+	validation {
+		condition = ""
+		error_message = ""
+	}
+}
+
+terraform.tfvars -> we can override default values from here
+*.tfvars -> terraform plan/apply -var-file=*.tfvars
+
+export TF_VAR_VAR_NAME=""
+terraform apply -var="instance_type=t3.micro"
+
+prefernce
+===========
+1. command line
+2. tfvars
+3. env variable
+4. default
+5. prompt
+
+key = expression ? "true_value" : "false_value"
+
+count.index
+
+count based loop -> we can loop the list
+
+instances = ["mongodb", "redis"]
+
+count = length(var.instances)
+
+count.index = 0
+count.index = 1
+
+outputs "ec2_info" {
+	value = aws_instances.roboshop[count.index]
+}
+
+join(" ",["Sivakumar", "Reddy", "M"]) -> converts from list to string
+
+merge(map1, map2, ...)
+
+map1 = {
+	course = "DevSecOps with AIOps"
+	duration = "120 Hrs"
+	trainer = "Sivakumar Reddy M"
+}
+
+map2 = {
+	course = "Terraform"
+	duration = "20 Hrs"
+}
+
+merge(map1, map2)
+
+merged_map = {
+	course = "Terraform"
+	duration = "20 Hrs"
+	trainer = "Sivakumar Reddy M"
+}
+
+project = "roboshop"
+env = "dev"
+component = ""
+Name = ""
+
+loops
+=====
+1. count based loop -> list
+2. for_each loop -> map
+
+for_each = var.instances
+each is a special variable given by terraform to iterate the items
+
+mongodb = {
+            "instance_type" = "t3.micro"
+        }
+		
+each.key -> mongodb
+each.value -> {
+            "instance_type" = "t3.micro"
+        }
+each.value.instance_type
+
+aws_security_group.roboshop["mongodb"]
+aws_security_group.roboshop["redis"]
+
+if instances have frontend as key, then create frontend public record. otherwise no need
+
+if you want to create count is 1
+if you dont want to create count is 0
+
+How to check a map has particualr key or not in terraform
+
+daws92s.store -> frontend.public.ip
+
+lookup(aws_instance.roboshop, "frontend").public_ip
+
+dynamic block
+=============
+if you want to repeat the block we can use dynamic loop
+port 22, 80, 8080, 3306
+
+loops
+=====
+1. count based
+2. for_each
+3. dynamic
+
+we used provider to create, update and delete the resources
+we can use data sources -> read the existing resources in provider
+
+ami_id -> devops-practice
+it changes
+
+aws account -> ec2 ami -> search for devops-practice -> get the AMI_ID
+devops-practice -> if we get multiple, then we will filter them
+
+aws_security_group.roboshop[0]
+aws_security_group.roboshop[1]
+aws_security_group.roboshop[2]
+
+resource "aws_instance" "catalogue" {
+	ami_id = "ami-1234"
+	instance_type = "t3.micro"
+}
+
+variable "instance_type" {
+	
+}
