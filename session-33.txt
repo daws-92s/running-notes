@@ -1,0 +1,141 @@
+Loops
+- count based -> useful to iterate lists
+- for each -> to iterate maps
+- dynamic block -> to create repeated blocks
+
+Data sources
+=============
+useful to query the existing information in the provider. useful to query and create other resources.
+
+we can query the AMI ID dynamically.
+
+EC2 -> AMI -> rehl9-devops-practice -> copy AMI ID
+searching and filtering
+
+data "type_of_resource_to_query" "name" {
+
+}
+
+state
+=======
+to match actual infra in provider with what user declared/desired
+
+*.tf files -> desired/declared infra
+provider -> actual infra
+state file -> it is like memory to terraform. terraform tracks what it had created through state file
+
+desired infra == actual infra
+
+1st time
+========
+state file -> no, because terraform haven't created anything yet
+tf files -> read the resources
+actual infra -> does resources exist in actual infra no
+
+terraform creates the resources in provider and note them in state file.
+
+2nd time
+=========
+apply again with no changes in tf files
+state file scan -> compare with actual infra
+state == actual
+
+any changes in .tf files -> no
+state == actual == tf files
+Nothing to do
+
+changes in tf files
+==================
+state file scan
+state == actual infra
+
+*.tf files -> yes
+terraform updates resources in provider, then note the changes into tf state file
+
+changes outside of terraform
+=================
+state file != actual infra
+tf files changes -> no
+
+terraform will revert those changes to match with declared/desired infra
+
+destroyed manually
+=================
+state file != actual infra
+tf file changes -> no
+
+terraform will recreate the resource
+
+resrouce -> attributes/arguments
+sg -> name, description, ingress, egress, vpc_id
+
+based on attributes we are asking for change provider will decide
+* It can update existing resource
+* It should replace, delete existing resource and then create new resource
+
+EC2+SG
+
+I will create new SG
+I will attach new SG to EC2
+I will detatch old SG
+I will delete old SG
+
+by default terraform destroys the existing resource and creates new resource
+
+if we delete state file
+=======================
+if there is no state file -> terraform assumes it is create infra for the first time
+it also assumes resources are not available in provider
+
+start applying tf files
+1. duplicate resources
+2. error -> a SG with name already exist
+
+state file should be in a secured place
+
+a team is working on infra
+
+member-1 created infra from his laptop, state is also in his laptop.
+member-2 also cloned and tried to create infra
+	-> no state file, starts trying to create resources
+	1. duplicate resources
+	2. error -> a SG with name already exist
+	
+state file should be maintained in remote location to prevenet duplicate or errored resources in colloboration environment and it should be locked to prevent parellel changes in state file..
+
+How to secure state file
+========================
+only terraform should have write access
+no one should have delete access to state files
+we can enable versions
+we can switch on data replication
+
+locals
+=======
+variables 
+-> we can override variables
+-> we can't use vars inside vars
+
+locals
+-> we cant override locals like variables
+-> we can assign a local name to function or expression and reuse them whenever required
+-> we can use vars inside locals and local inside locals
+
+provisioners
+============
+1. local
+2. remote
+3. file
+
+provisioners are useful to execute commands or scripts while creation or destroying the resources. by default terraform executes provisioners at creation time.
+
+It executes provisioners in sequence order
+
+
+local -> where you are terraform command
+remote -> terraform connecting the server
+file -> useful to copy file from local to remote
+
+terraform creates some resoureces, we can take some actions after creating the resource through provisioners
+
+local-exec
