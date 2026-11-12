@@ -1,0 +1,80 @@
+data sources -> we can query existing information from provider, helpful to create other resources using this info
+locals -> a named values for expressions and functions. we can use vars inside locals, locals inside locals. we cant override locals
+
+state and remote state
+=====================
+state is memory to terraform to compare what it had created
+to match desired infra with actual infra. it uses state to acheive this. we should keep state in secure location, in collobaration environment we should have central place like S3 and it should be locked to prevent parellel changes
+
+provisioners
+============
+useful to perform creation time destroy time commands or scripts
+1. local-exec -> where terraform command runs
+2. remote-exec -> inside server, needs connection block before running commands
+3. file -> copy files from local to server
+
+How to create multiple env using terraform
+==========================================
+isolation
+
+1. terraform workspaces
+
+workspace is env name
+terraform workspace new dev
+terraform.workspace = dev
+terraform.workspace = prod
+
+dev -> t3.micro
+sit -> t3.small
+prod -> t3.medium
+
+with in the same bucket terraform creates different folders for different env to maintain the state
+
+instance is isloated, but SG is not isolated as per env -> roboshop-workspaces-demo
+I moved to uat
+instance is created, but SG trying to create with same name(error) -> roboshop-workspaces-demo-terraform.workspace
+
+roboshop-workspaces-demo-dev
+
+pros
+====
+1. same code
+2. state isolation within the same bucket
+
+cons
+====
+1. we cant acheive isolation with diff AWS accounts.
+2. changes doen is one env, effects other env too.
+3. there may be chances you are in wrong workspace and destroy or update
+
+tfvars approach
+===========
+tfvars -> setup the values to terraform variables, it can override default values
+I need seperate backend configuration for different environments to maintain state isolation
+
+pros
+====
+same code
+clear state isolation between environments
+
+cons
+====
+1. if you forget reconfigure, you may be in prod assuming that you are in dev
+2. while apply or destroy by mistake if you load diff vars, then problems comes
+3. changes done for one env, defnitely effects other environment. we should be very careful. a single change also we should think other env too..
+
+diff repos for diff env
+=======================
+roboshop-infra-dev
+roboshop-infra-prod
+
+cons
+====
+code duplication
+
+pros
+====
+since code is sepereate for seperate env, no accidental changes. a complete isolation
+
+terraform modules -> like functions
+we can keep the repeated code in a function, we pass inputs. we call it whenever we want
