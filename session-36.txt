@@ -1,0 +1,60 @@
+VPC
+Subnets
+Route tables -> set of rules/routes where network should be redirected
+	Routes
+NAT gateway
+
+public subnet vs private subnet
+==============================
+names does not make any difference, if the public subnet has internet route then it is called as public subnet. if a subnet does not have public route then it is called as private subnet
+
+public subnet -> we get public IP
+private/database subnet -> we will not get public IP 
+
+How instances inside private/database connect to internet
+
+ingress -> we dont want un necessary/unsecured traffic from internet
+egress -> we are connecting to traffic. traffic is originating from our instances.
+
+PMO -> Ministry -> public affairs -> Person
+
+NAT gateway -> NAT gateway lies in public subnet. instances inside private/database subntes connects to NAT gateway and then to internet. NAT gateway requires stable/elastic IP. we should add route to NAT gateway in route tables
+
+elastic IP == static IP
+
+internet gateway -> incoming connections
+NAT gateway -> outgoing connections
+
+10.0.0.0/16 -> Internal VPC range
+
+10.0.21.10 -> DB server
+
+a instance in private subnet wants to connect DB, we should check does it have route to DB or not..
+
+165.87.98.56 -> 
+
+VPC Module
+==========
+VPC
+IGW and attaching
+Subnets
+	Public -> 10.0.1.0/24, 10.0.2.0/24
+	Private -> 10.0.11.0/24, 10.0.12.0/24
+	Database -> 10.0.21.0/24, 10.0.22.0/24
+
+us-east-1 -> query AWS to give AZS info in us-east-1
+Route tables
+
+100.10.0.0/16 -> local
+
+100.10.2.6
+
+10.0.0.0/24 -> 256 subnets
+2, 4, 8, 16
+
+10.0.0.0/20 -> 20 bits
+
+12 bits
+
+2^12 = 4096 hosts
+2^4 = number of subnets
