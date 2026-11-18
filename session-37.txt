@@ -1,0 +1,67 @@
+VPC
+IGW
+Subnets
+Route tables
+Associations of Route tables with subnets
+EIP
+NAT
+Routes
+
+VPC peering
+=============
+By default 2 VPC in AWS cant connect with each other,
+
+2 village
+village -> pincode
+if we want to connect 2 villages they should have diff pincode. They should have roads connecting between them
+
+village-1 to connect village-2 there should be a road from village-1 to village-2
+
+2 VPC
+=====
+2 VPC should have diff CIDR
+10.0.0.0/16 -> VPC-1
+10.1.0.0/16 -> VPC-2
+
+same account, same region, diff VPC
+same account, diff region, diff VPC
+diff account, same region, diff VPC
+diff account, diff region, diff VPC
+
+VPC-1 private-subnet-1a instance-1
+VPC-2 private-subnet-1a instance-2(10.1.2.0)
+
+instance-1 -> instance-2
+instance-1 -> subnet -> VPC-1 -> VPC-2 -> subnet -> instance-2
+
+10.0.0.0/16 -> Local
+
+10.1.0.0/16 -> VPC Peering
+10.1.2.0
+
+roboshop-dev -> request
+default -> acceptor
+
+VPC resource or non VPC resource
+
+SSM parameter store
+a storage of key value pairs
+
+AWS -> PaaS
+
+database_subnet_ids = [
+  "subnet-0f23e69b6943441fd",
+  "subnet-05343dfa66ba34392",
+]
+private_subnet_ids = [
+  "subnet-076c0a9d62e35b356",
+  "subnet-075441846c3325c6c",
+]
+public_subnet_ids = [
+  "subnet-06eeab3cee032e47b",
+  "subnet-001339fc5c1d83504",
+]
+vpc_id = "vpc-09ceb00109e572dcf"
+
+Separate strings using commas.
+subnet-06eeab3cee032e47b, subnet-001339fc5c1d83504 -> string
