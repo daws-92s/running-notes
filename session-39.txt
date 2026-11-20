@@ -1,0 +1,58 @@
+IAM Role
+=========
+access-key, secret-key
+
+IAM -> Identity access management
+
+User -> human user, they have username and password. or access-key and secret-key for programmatic access
+Group -> a group of users
+Role -> non human user. like services in AWS. a service in AWS wants to do CRUD on other resources we create role to that service. third party users called as federated users they can also assume this role.
+
+Policy -> a list of permissions we can perform on resources
+
+authentication and authorisation
+
+authentication -> who you are
+authorisation -> what you are
+
+nouns and verbs
+nouns -> resources -> EC2, S3, ALB, EBS, R53, CDN, etc...
+verbs -> actions on resources -> CRUD
+
+Policy -> a list of permissions
+
+- can create ec2 (what action on what resource)
+- can read s3
+- can read alb
+
+ARN -> Amazon resource name -> a unique name accross  1 AWS account or all AWS accounts
+
+arn:aws:iam::aws:policy/AdministratorAccess
+
+userdata
+========
+dnf install nginx -y
+systemctl start nginx
+
+by default user data runs when the instance is launched. it will ignore if you update.
+
+user_data_replace_on_change is true, then AWS will recreate the instance and run user data
+if there is error in user data terraform doesnt aware
+
+terraform_data
+==============
+earlier called as null resource, it will not create any resource, it doesnt require any provider as well in built in terraform. it follows terraform lifecycle
+
+init, plan, create, read/refresh, update, destroy
+
+a dummy resource used for trigger and provisioners
+
+ansible-controller -> mongodb (push)
+
+dnf install ansible -y
+
+mongodb
+=======
+dnf install ansible -y
+pull ansible roles
+this server can configure itself by targeting localhost
