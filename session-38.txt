@@ -1,0 +1,19 @@
+roboshop-dev-mongodb
+roboshop-dev-backend-alb
+
+we should raise a ticket, get the approval, then firewall team must mention that ticket number atleast as comment to open SG inbound rule..
+
+mongodb, redis, mysql, rabbitmq
+catalogue, user, cart, shipping, payment
+backend-alb
+frontend
+frontend-alb
+bastion
+vpn
+
+robboshop-dev-frontend-alb
+
+/roboshop/dev/mongodb_sg_id
+/roboshop/dev/frontend_alb_sg_id
+
+subnet-06eeab3cee032e47b, subnet-001339fc5c1d83504
