@@ -1,0 +1,35 @@
+for i in 00-vpc/ 10-sg/ 20-sg-rules/ 30-bastion/; do cd $i; terraform apply -auto-approve; cd ..;done
+
+bastion host ->
+user data
+=========
+AWS executes once the instance is launched, if the script fails terraform cant understand this. we use this for simple installations and configurations
+
+extending the root disk
+installing terraform
+
+IAM Role -> non human users like AWS services, federated users, other AWS accounts, etc.
+Attach IAM policy with role
+Trust policy -> EC2
+
+connect to bastion host -> run terraform apply
+
+create MongoDB instance
+connect using terraform_data (it will not create any resources but follows terraform lifecycle. if the remote provision fails, this resource marked as failure)
+
+ansible pull
+===========
+install ansible
+pull the configuration from github
+execute the playbook
+
+mongodb-dev.daws92s.store
+mongodb-sit.daws92s.store
+mongodb.daws92s.store -> default to prod
+
+create a role for MYSQL, give permission to read this paramter
+attach this role as instance profile to MySQL
+
+aws ssm get-parameter --name "/roboshop/dev/rabbitmq_user" --query "Parameter.Value" --output text
+
+Lap -> VPC -> IGW -> Subnet RT attach(Route IGW) -> EC2 SG
