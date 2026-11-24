@@ -1,0 +1,57 @@
+Team -> A group of members
+Team Lead -> He will assing work to members
+			 is the member available
+			 is he super busy or less busy
+
+TL/TM -> Dev, Testing, Support, etc.
+		
+		 if DEV related work -> He will assing to Dev team
+		 if testing work -> He will assing to testing team
+
+HR -> Job Description
+Roles, Responsibilties, expectation, tech stack, etc.
+
+4 members team, daily 10hr..over utilisation -> recruit new resources
+				daily 2hr... less utilisation -> release the resources
+				daily 6hr -> fine
+				
+Client BA -> DM(Release process) -> Engineering managers(Own technology) -> Teams
+
+He will have seperate phone line from Client BA
+
+Target group -> a group of instances -> team
+Instance -> team member
+Health check -> TL checking member available or not
+Load Balancer -> TL/TM/DM
+Autoscaling -> HR
+Launch template -> settings required to launch the instance -> JD
+Phone Line -> Listener
+Rules -> if dev work asssign to DEV team
+
+*.backend-alb-dev.daws92s.store
+
+catalogue.backend-alb-dev.daws92s.store -> assign to catalogue target group
+
+LB Rules
+=========
+ALB should be highly available, we should select atleast 2 AZ
+
+ALB -> Listener(HTTP/80) -> Rules(Fixed Response)
+
+name
+which N/W
+subnets
+SG
+fixed response
+
+Project infra -> One time process. VPC, SG, Databases, LB, Hosted Zone, etc...
+Application infra -> stateless applications.
+
+1. suppose 10 instances are running, connect to the instances and change the application. stop server, remove old application, download latest application, restart application
+
+2. create new instance, configure it, take AMI, then handover/refresh to autoscaling. create new instances with new AMI, delete old instances.
+
+1. create catalogue instance
+2. configure it with remote provisioner
+3. take AMI
+4. 
