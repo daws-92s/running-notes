@@ -1,0 +1,46 @@
+TL/TM/DM -> Load Balancer
+A seperate phone to listen client -> Listener, HTTPS, HTTP
+Team -> Target group -> A group of instances related to one component
+JD -> Launch template -> a pre configured settings to launch instances
+HR -> AutoScaling
+Team member -> Instance
+Checking availability of the associate -> Health check
+Type of work before assigning -> Listener rule
+
+Launch catalogue instance
+Configure with terraform data
+Stop the instance
+Take AMI
+Create Launch template
+Create target group
+AutoScaling
+Launched the instances in target group
+Add listener rule
+
+
+daws92s.store
+
+catalogue.backend-alb-dev.daws92s.store -> forward to catalogue target group
+backend-alb-dev.daws92s.store/catalogue -> 
+
+bank.in/hdfcbank
+hdfcbank.bank.in
+
+netbanking.icicibank.in
+icicibank.in/netbanking
+
+https://retailnetbanking.icici.bank.in
+
+http://catalogue.backend-alb-dev.daws92s.store
+
+ALB -> Listener -> Rules -> Target Group -> Instance
+
+aws ec2 terminate-instances --instance-ids i-1234567890abcdef0
+
+daws92s.store, we need certificate for this
+
+CA -> we can request for certificate, they will validate
+
+TXT records -> domain validation
+
+for i in $(ls -dr */); do cd $i; terraform init; terraform destroy -auto-approve ;cd .. ; done 
