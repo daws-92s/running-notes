@@ -1,0 +1,67 @@
+Create EC2 instance
+Configure it with remote-exec provisioner using triggers
+EC2 instance stop
+take AMI
+target group
+Launch template, create new versions
+autoscaling, launch the instance in target group. min max desired
+autoscaling policy, avgcpuutilisation
+listener rule, catalogue.backend-alb-dev.daws92s.store -> catalogue target group
+delete the instance
+
+next new release
+
+rolling update
+==============
+4 instances
+1 new instance with new AMI, when it is up, it will delete one old instance
+2nd new instance with new AMI, when it is up, it will delete one old instance
+3rd new instance with new AMI, when it is up, it will delete one old instance
+4th new instance with new AMI, when it is up, it will delete one old instance
+
+ACM
+===
+we got doctor certificate, write some info, our name, address, father name, why this certificate? who is the target? doctor sign, seal, register ID, name, etc..
+
+daws92s.store, certificate is for domain
+CA, certificate authorities
+
+Certificate signing request
+============================
+domain, company, organisation/department, address, etc.
+SAN -> roboshop-dev.daws92s.store, roboshop-cdn.daws92s.store
+
+.crt file -> public
+.key file -> private
+
+CA: Let's Encrypt
+diagrams.net
+Issued On	Saturday, October 3, 2026 at 10:16:06 PM
+Expires On	Friday, January 1, 2027 at 10:16:05 PM
+SAN:  *.diagrams.net
+
+diagrams.net
+
+browser -> server (TCP)
+server sends ACK with certificate. .crt file
+
+server checks the certificate validity and domain
+
+OS have all popular CA public certificates are installed. browser verifies server sent certificate is issued by CA or not
+
+Root CA -> Intermediate CA -> Domain crt
+VALID
+
+browser creates one sample text(random text) encrypted with .crt file
+sends to server, server decrypts and send the answer to browser
+
+if decrypted word is same as before encryption, then connection established
+further communication is encrypted with this text and send to server...
+
+ALB -> Listener -> Rule -> TG -> Instance
+
+
+
+
+
+
